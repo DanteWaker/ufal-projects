@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package vectorclock;
+
+service VectorClockService {
+  rpc UpdateVectorClock(VectorClockRequest) returns (VectorClockReply) {}
+}
+
+message VectorClockRequest {
+  map<string, int32> vectorClock = 1;
+}
+
+message VectorClockReply {
+  string acknowledgement = 1;
+  map<string, int32> updatedVectorClock = 2;
+}

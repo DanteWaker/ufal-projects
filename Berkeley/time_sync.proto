@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package timesync;
+
+service TimeSyncService {
+  rpc RegisterClient(RegisterClientRequest) returns (Empty);
+  rpc RequestClientTime(Empty) returns (ClientTimeResponse);
+  rpc AdjustClientTime(TimeAdjustment) returns (Empty);
+  rpc StreamTimeUpdates(Empty) returns (stream TimeUpdate); // Novo método RPC
+}
+
+message Empty {}
+
+message RegisterClientRequest {
+  string client_id = 1;
+}
+
+message ClientTimeResponse {
+  int64 seconds = 1;
+  int32 milliseconds = 2;
+}
+
+message TimeAdjustment {
+  int64 adjustment = 1;
+}
+
+message TimeUpdate {
+  int64 seconds = 1;
+  int32 milliseconds = 2;
+}
